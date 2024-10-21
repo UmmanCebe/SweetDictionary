@@ -44,7 +44,7 @@ namespace SweetDictionary.WebApi.Controllers
             return Ok(user);
         }
 
-        [HttpPost("update")]
+        [HttpPut("update")]
         public IActionResult Update(UpdateUserRequestDto dto)
         {
             var result = _userService.Update(dto);

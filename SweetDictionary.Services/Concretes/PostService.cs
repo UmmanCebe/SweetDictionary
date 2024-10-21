@@ -4,6 +4,7 @@ using SweetDictionary.Models.Entities;
 using SweetDictionary.Models.Entities.Posts;
 using SweetDictionary.Repositories.Repositories.Abstracts;
 using SweetDictionary.Services.Abstracts;
+using SweetDictionary.Services.Constants;
 using SweetDictionary.Services.Rules;
 
 namespace SweetDictionary.Services.Concretes;
@@ -145,7 +146,7 @@ public class PostService : IPostService
             return new ReturnModel<PostResponseDto>
             {
                 Data = response,
-                Message = "Post Güncellendi.",
+                Message = Messages.PostUpdatedMessage,
                 Status = 200,
                 Success = true
             };

@@ -20,5 +20,8 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
             Id = 1,
             Name = "Yazılım"
         });
+
+       // builder.Navigation(x => x.Posts).AutoInclude();
+
     }
 }

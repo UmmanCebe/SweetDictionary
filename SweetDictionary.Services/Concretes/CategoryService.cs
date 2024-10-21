@@ -75,6 +75,7 @@ namespace SweetDictionary.Services.Concretes
         public ReturnModel<CategoryResponseDto> Update(UpdateCategoryRequestDto dto)
         {
             var category = _mapper.Map<Category>(dto);
+            var updated = _categoryRepository.Update(category);
             var response = _mapper.Map<CategoryResponseDto>(category);
             return new ReturnModel<CategoryResponseDto>
             {

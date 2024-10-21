@@ -4,6 +4,8 @@ using SweetDictionary.Services.Abstracts;
 using SweetDictionary.Repositories.Repositories.Abstracts;
 using AutoMapper;
 using SweetDictionary.Models.Entities;
+using SweetDictionary.Models.Entities.Posts;
+using SweetDictionary.Services.Rules;
 
 namespace SweetDictionary.Services.Concretes;
 public class UserService : IUserService
@@ -59,27 +61,42 @@ public class UserService : IUserService
 
     public ReturnModel<UserResponseDto> GetById(long id)
     {
-        var user = _userRepository.GetById(id);
-        UserResponseDto response = _mapper.Map<UserResponseDto>(user);
-        return new ReturnModel<UserResponseDto>
+        try
         {
-            Data = response,
-            Success = true,
-            Status = 200,
-            Message = "User getirildi."
-        };
+            var user = _userRepository.GetById(id);
+            UserResponseDto response = _mapper.Map<UserResponseDto>(user);
+            return new ReturnModel<UserResponseDto>
+            {
+                Data = response,
+                Success = true,
+                Status = 200,
+                Message = "User getirildi."
+            };
+        }
+        catch (Exception ex)
+        {
+            return ExceptionHandler<UserResponseDto>.HandleException(ex);
+        }
     }
 
     public ReturnModel<UserResponseDto> Update(UpdateUserRequestDto dto)
     {
-        var user = _mapper.Map<User>(dto);
-        var response = _mapper.Map<UserResponseDto>(user);
-        return new ReturnModel<UserResponseDto>
+        try
         {
-            Data = response,
-            Success = true,
-            Status = 200,
-            Message = "User güncellendi."
-        };
+            var user = _mapper.Map<User>(dto);
+            var updated = _userRepository.Update(user);
+            var response = _mapper.Map<UserResponseDto>(user);
+            return new ReturnModel<UserResponseDto>
+            {
+                Data = response,
+                Success = true,
+                Status = 200,
+                Message = "User güncellendi."
+            };
+        }
+        catch (Exception ex)
+        {
+            return ExceptionHandler<UserResponseDto>.HandleException(ex);
+        }
     }
 }

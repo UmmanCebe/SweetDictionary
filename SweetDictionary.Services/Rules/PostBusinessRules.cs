@@ -11,6 +11,5 @@ public class PostBusinessRules(IPostRepository _postRepository)
         {
             throw new NotFoundException($"İlgili id ye göre post bulunamadı : {id}");
         }
-
     }
 }

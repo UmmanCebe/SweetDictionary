@@ -76,6 +76,7 @@ public class CommentService : ICommentService
     public ReturnModel<CommentResponseDto> Update(UpdateCommentRequestDto dto)
     {
         var comment = _mapper.Map<Comment>(dto);
+        var updated = _commentRepository.Update(comment);
         var response = _mapper.Map<CommentResponseDto>(comment);
         return new ReturnModel<CommentResponseDto>
         {
